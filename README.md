@@ -3,7 +3,7 @@ Implements data type Rational numbers that supports addition, subtraction, multi
 ## constructor
 (long numerattor, denomirator)
 ## methods
-gcd (long a, long b)
+gcd (long a, long b) - ( 1/3 -> 1/6)
 ## operators 
 + adding , -subsctract, * - multiply, / - divide
 ## override
@@ -15,6 +15,8 @@ ToString (numerator/denomirator)
 Класс реализует действия над рациональными числами - сложение, вычитание , умножение и деление.
 ## Конструктор
 (числитель, знаминатель)
+## методы
+gcd - нахожденение наибольшего общего делителя (для сокращения рациональных дробей типа 2/6 к 1/3)
 ## операторы
 + - сложение, - вычитание , * - умножение, /- деление
 ## перегруженные методы
