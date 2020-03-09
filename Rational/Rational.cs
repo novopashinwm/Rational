@@ -20,6 +20,9 @@ namespace Rational
                 throw new DivideByZeroException("Знаменатель не может быть равен нулю!");
             }            
             B = b;
+            long mult = Rational.GCD(A, B);
+            A /= mult;
+            B /= mult;
         }
 
         public long this[int i] 
@@ -27,13 +30,14 @@ namespace Rational
             get {
                 if (i == 0) return A;
                 if (i == 1) return B;
-                throw new ArithmeticException("Указан не правильный индекс!");
+                throw new IndexOutOfRangeException("Указан не правильный индекс!");
             }
         }
 
         public static long GCD(long a, long b) 
         {
-            return b == 0 ? a : GCD(b, a % b);
+            return Math.Abs(b) == 0 ? Math.Abs(a) 
+                : GCD(Math.Abs(b), Math.Abs(a) % Math.Abs(b));
         }
 
         public override string ToString()
@@ -45,33 +49,37 @@ namespace Rational
         {
             long a_new = x.A * y.B + y.A * x.B;
             long b_new = x.B * y.B;
-            long mult = GCD(a_new, b_new);
-            return new Rational(a_new / mult, b_new / mult);
+            return new Rational(a_new ,b_new);
         }
 
+        public static Rational operator *(Rational x, int n) {
+            return new Rational(x.A * n, x.B);
+        }
+
+        public static Rational operator -(Rational x) 
+        {
+            return new Rational(-x.A, x.B);
+        }
         public static Rational operator -(Rational x, Rational y)
         {
-            long a_new = x.A * y.B - y.A * x.B;
-            long b_new = x.B * y.B;
-            long mult = GCD(a_new, b_new);
-            return new Rational(a_new / mult, b_new / mult);
+            return x + (-y);
         }
 
         public static Rational operator *(Rational x, Rational y)
         {
             long a_new = x.A * y.A;
             long b_new = x.B * y.B;
-            long mult = GCD(a_new, b_new);
-            return new Rational(a_new / mult, b_new / mult);
+            return new Rational(a_new, b_new);
         }
 
         public static Rational operator /(Rational x, Rational y)
         {
             long a_new = x.A * y.B;
             long b_new = x.B * y.A;
-            long mult = GCD(a_new, b_new);
-            return new Rational(a_new / mult, b_new / mult);
+            return new Rational(a_new, b_new);
         }
+
+       
 
     }
 }
